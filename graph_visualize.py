@@ -52,7 +52,6 @@ def generate_graph_network(graph_dict, threshold=5, rm_isolates=True):
 def visualize(G, inspect_edges=False):
     random.seed(42)
 
-
     output_file("networkx_graph.html")
     plot = figure(title="Networkx Integration Demonstration", x_range=(-1.1,1.1), y_range=(-1.1,1.1))
     graph_renderer = from_networkx(G, nx.spring_layout, scale=1, center=(0,0))

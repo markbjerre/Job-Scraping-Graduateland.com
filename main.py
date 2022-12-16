@@ -15,25 +15,6 @@ def Verify_vertlen(num):
         else:
             print('please enter an integer or enter \'0\' to exit')
 
-def Verify_Criteria(criteria):
-    while True:
-        print('\nAvailable criteria: \n1. job description \n2. skills \n3. category')
-        try:
-            x = int(input('please enter number 1, 2 or 3'))
-        except:
-            print('did not recognize input, please try again or enter \'0\' to exit')
-        if x == 'exit': 
-            return criteria
-        if x == 1:
-            return 'job_desc'
-        elif x == 2:
-            return 'skills'
-        elif x == 3:
-            return 'category'
-        elif x == 0:
-            return criteria
-        else:
-            print('Please enter a number between 1 - 3 or type exit to exit')
 
 def Verify_Min_Neighborsa(min_neighbors):
     while True:
@@ -76,7 +57,7 @@ def Verify_Inspect_Edges(inspect_edges):
 
 def change_menu(config):
     print('\nwhat configuration would you like to change?')
-    print('1. jobs_in_graph -', config['jobs_in_graph'], '\n2. criteria - ', config['criteria'], '\n3. neighbors -', config['min_neighbors'],  '\n4. remove_isolates -',config['remove_isolates'],'\n5. inspect_edges -', config['inspect_edges'], '\n0. exit')
+    print('1. jobs_in_graph -', config['jobs_in_graph'],  '\n2. neighbors -', config['min_neighbors'],  '\n3. remove_isolates -',config['remove_isolates'],'\n4. inspect_edges -', config['inspect_edges'], '\n0. exit')
     while True:
         try:
             x = int(input('\nplease enter the number of the config you would like to change'))
@@ -88,12 +69,10 @@ def change_menu(config):
     if x == 1:
         config['jobs_in_graph'] = Verify_vertlen(config['jobs_in_graph'])
     elif x == 2:
-        config['criteria'] = Verify_Criteria(config['criteria'])
-    elif x == 3:
         config['min_neighbors'] = Verify_Min_Neighborsa(config['min_neighbors'])
-    elif x == 4:
+    elif x == 3:
         config['remove_isolates'] = Verify_Rm_Isolates(config['remove_isolates'])
-    elif x == 5:
+    elif x == 4:
         config['inspect_edges'] = Verify_Inspect_Edges(config['inspect_edges'])
     elif x == 0:
         return config
@@ -128,7 +107,7 @@ def intro_q(config):
 
 def Make_Graph(config):
     verts = Generate_Vertices(config['jobs_in_graph'])
-    dict = generate_graph_dict(verts, config['criteria'])
+    dict = generate_graph_dict(verts)
     network = generate_graph_network(dict, config['min_neighbors'],config['remove_isolates'])
     visualize(network, config['inspect_edges'])
 
@@ -145,11 +124,10 @@ def Repeat_Process():
 
 if __name__=='__main__':
     config = {'jobs_in_graph': 150, 
-            'criteria':'job_desc', 
             'min_neighbors': 5, 
             'remove_isolates':True, 
             'inspect_edges': False} 
-    Make_Graph(config)
+
 
     print('welcome to Graduateland Job Exploration')
     print('All data used for this program is stored in cache files. \nIf you would like to try the complete process with new data, please run crawler.py for fresh data or delete cache files (WARNING: this may take a long time, if crawler input and vertices input are big')

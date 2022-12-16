@@ -64,7 +64,7 @@ def key_word_extractor(extractor, text):
     return word_list
 
 
-def generate_graph_dict(vertices_list, criteria):
+def generate_graph_dict(vertices_list, criteria='job_desc'):
     #cache load (3 categories, job_desc, skills, category)
     word_cache_str = 'word_cache.json'
     word_cache = open_cache(word_cache_str)
